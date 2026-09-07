@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我应该回国吗？ — 硅谷工程师回国决策手册</title>
+  <meta name="description" content="面向在海外工作的资深工程师的回国方法论：市场、薪酬、城市、家庭、心理、时机、案例、时代挑战、实操九大板块，40 章 14 万字。">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            navy: { 50:'#ebf0f5', 100:'#d6e0eb', 200:'#adc2d9', 300:'#84a3c7',
+                    400:'#5b84b5', 500:'#3b5b7f', 600:'#1e3a5f', 700:'#15293f',
+                    800:'#0f1f30', 900:'#0a1521' },
+            gold: { DEFAULT:'#b8860b', light:'#d4a843', dark:'#8b6508' },
+            ink:  { DEFAULT:'#111827', light:'#4b5563', muted:'#6b7280' }
+          },
+          fontFamily: {
+            serif: ['"Noto Serif SC"', '"Source Han Serif SC"', '"Songti SC"', 'serif'],
+            sans:  ['-apple-system', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="assets/css/book.css">
+  <script defer src="assets/js/chapters.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+  <script defer src="assets/js/app.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+</head>
+<body class="bg-white dark:bg-slate-900 text-ink dark:text-slate-200 font-sans antialiased">
+
+<div x-data="bookApp()" x-init="init()">
+
+  <!-- ========== 首页 view='home' ========== -->
+  <div x-show="view==='home'" class="fade-enter">
+
+    <!-- 顶部导航条 -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur border-b border-slate-200 dark:border-slate-700">
+      <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="font-serif text-xl font-bold text-navy-600 dark:text-navy-200">我应该回国吗？</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button @click="toggleTheme()" class="icon-btn" title="切换主题">
+            <span x-text="theme==='light' ? '🌙' : '☀️'"></span>
+          </button>
+          <button @click="openChapter(lastChapter || '01')" class="btn-primary text-sm hidden md:inline-block">开始阅读</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 1. 英雄区 -->
+    <section class="max-w-6xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+      <div class="flex justify-center">
+        <img src="assets/images/cover.svg" onerror="this.src='assets/images/cover.png'" alt="封面" class="w-full max-w-sm rounded-lg shadow-2xl">
+      </div>
+      <div>
+        <p class="text-gold font-sans text-sm tracking-widest mb-4">SILICON VALLEY · 回国决策手册</p>
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-navy-600 dark:text-navy-200 leading-tight mb-4">我应该回国吗？</h1>
+        <p class="font-serif text-lg text-navy-400 dark:text-navy-300 mb-6">Should I Go Back to China?</p>
+        <p class="text-ink-light dark:text-slate-400 leading-relaxed mb-8">
+          面向在海外（尤其硅谷）工作的资深工程师 / 管理者 / 管线专家，提供一套从信息调研到落地执行的回国方法论。全书 40 章，约 14 万字，覆盖市场、薪酬、城市、家庭、心理、时机、案例、时代挑战、实操九大板块。
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <button @click="openChapter(lastChapter || '01')" class="btn-primary">开始阅读</button>
+          <button @click="randomChapter()" class="btn-secondary">随机一章</button>
+        </div>
+        <p x-show="lastChapter" class="text-sm text-ink-muted dark:text-slate-500 mt-4">
+          上次读到第 <span x-text="lastChapter"></span> 章
+        </p>
+      </div>
+    </section>
+
+    <!-- 2. 核心理念 -->
+    <section class="max-w-3xl mx-auto px-6 py-12">
+      <div class="card rounded-2xl p-8 md:p-12 text-center">
+        <p class="text-gold font-sans text-sm tracking-widest mb-4">核心主张</p>
+        <p class="font-serif text-xl md:text-2xl leading-relaxed text-ink dark:text-slate-200">
+          回国不是一个二元决定，而是一个至少包含<span class="text-gold font-bold">七个相互耦合子决策</span>的序列。用<span class="text-gold font-bold">五因子模型</span>评估，看最短板——大多数回国决策的失败不是信息问题，是心理问题。
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. 五因子模型 -->
+    <section class="max-w-6xl mx-auto px-6 py-12">
+      <h2 class="font-serif text-2xl md:text-3xl font-bold text-navy-600 dark:text-navy-200 text-center mb-2">五因子决策模型</h2>
+      <p class="text-center text-ink-muted dark:text-slate-500 mb-10">回国 = f(动机, 能力可迁移性, 机会成本, 家庭约束, 时机) — 看最短板</p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="card">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-8 h-8 rounded-full bg-navy-600 text-white flex items-center justify-center font-bold text-sm">1</span>
+            <h3 class="font-serif text-lg font-bold text-navy-600 dark:text-navy-200">动机</h3>
+          </div>
+          <p class="text-ink-light dark:text-slate-400 text-sm leading-relaxed">家庭/文化/事业/教育/情绪，诚实识别真实动机是第一步。情绪驱动决策的回国失败率最高。</p>
+        </div>
+        <div class="card">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-8 h-8 rounded-full bg-navy-600 text-white flex items-center justify-center font-bold text-sm">2</span>
+            <h3 class="font-serif text-lg font-bold text-navy-600 dark:text-navy-200">能力可迁移性</h3>
+          </div>
+          <p class="text-ink-light dark:text-slate-400 text-sm leading-relaxed">硬技能可迁移、软技能部分可迁移、社会资本几乎不可迁移。回国等于从零建网。</p>
+        </div>
+        <div class="card">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-8 h-8 rounded-full bg-navy-600 text-white flex items-center justify-center font-bold text-sm">3</span>
+            <h3 class="font-serif text-lg font-bold text-navy-600 dark:text-navy-200">机会成本</h3>
+          </div>
+          <p class="text-ink-light dark:text-slate-400 text-sm leading-relaxed">不止工资差：RSU 未归属、绿卡排期、配偶收入损失、子女教育切换，常比想象大 30-50%。</p>
+        </div>
+        <div class="card">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-8 h-8 rounded-full bg-navy-600 text-white flex items-center justify-center font-bold text-sm">4</span>
+            <h3 class="font-serif text-lg font-bold text-navy-600 dark:text-navy-200">家庭约束</h3>
+          </div>
+          <p class="text-ink-light dark:text-slate-400 text-sm leading-relaxed">回国失败最高频原因。配偶是否真心同意、子女学制、父母养老——给配偶一票否决权。</p>
+        </div>
+        <div class="card">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-8 h-8 rounded-full bg-navy-600 text-white flex items-center justify-center font-bold text-sm">5</span>
+            <h3 class="font-serif text-lg font-bold text-navy-600 dark:text-navy-200">时机</h3>
+          </div>
+          <p class="text-ink-light dark:text-slate-400 text-sm leading-relaxed">年龄/职级窗口、行业周期、公司融资窗口、个人绿卡窗口。时机影响薪酬水位 30%+。</p>
+        </div>
+        <div class="card flex items-center justify-center text-center">
+          <div>
+            <p class="font-serif text-3xl text-gold mb-2">⚠</p>
+            <p class="font-serif text-sm text-ink-light dark:text-slate-400">看最短板，不是看总分</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 金句墙 -->
+    <section class="max-w-6xl mx-auto px-6 py-12">
+      <h2 class="font-serif text-2xl md:text-3xl font-bold text-navy-600 dark:text-navy-200 text-center mb-10">金句精选</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="card quote-card">
+          <p class="font-serif text-lg leading-relaxed text-ink dark:text-slate-200">"回国不是一个决定，是一个决策序列。"</p>
+          <p class="text-xs text-ink-muted dark:text-slate-500 mt-3">— 第 01 章</p>
+        </div>
+        <div class="card quote-card">
+          <p class="font-serif text-lg leading-relaxed text-ink dark:text-slate-200">"用回国解决一个在美国的问题，几乎必然失败。"</p>
+          <p class="text-xs text-ink-muted dark:text-slate-500 mt-3">— 第 01 章</p>
+        </div>
+        <div class="card quote-card">
+          <p class="font-serif text-lg leading-relaxed text-ink dark:text-slate-200">"知道别人怎么栽的，比知道别人怎么成的更重要。"</p>
+          <p class="text-xs text-ink-muted dark:text-slate-500 mt-3">— 第 01 章</p>
+        </div>
+        <div class="card quote-card">
+          <p class="font-serif text-lg leading-relaxed text-ink dark:text-slate-200">"大多数回国决策的失败不是信息问题，是心理问题。"</p>
+          <p class="text-xs text-ink-muted dark:text-slate-500 mt-3">— 第 25-28 章</p>
+        </div>
+        <div class="card quote-card">
+          <p class="font-serif text-lg leading-relaxed text-ink dark:text-slate-200">"回国不是逃离 AI 的避难所，国内大厂的 AI 工具化甚至比硅谷更激进。"</p>
+          <p class="text-xs text-ink-muted dark:text-slate-500 mt-3">— 第 32 章</p>
+        </div>
+        <div class="card quote-card">
+          <p class="font-serif text-lg leading-relaxed text-ink dark:text-slate-200">"把回国当单点决定的人，几乎都在某个耦合变量上翻车。"</p>
+          <p class="text-xs text-ink-muted dark:text-slate-500 mt-3">— 第 01 章</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 目录导航 -->
+    <section class="max-w-6xl mx-auto px-6 py-12">
+      <h2 class="font-serif text-2xl md:text-3xl font-bold text-navy-600 dark:text-navy-200 text-center mb-2">全书目录</h2>
+      <p class="text-center text-ink-muted dark:text-slate-500 mb-10">9 篇 · 40 章 · 点击任一章开始阅读</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <template x-for="part in parts" :key="part.id">
+          <div class="card">
+            <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-200 dark:border-slate-700">
+              <h3 class="font-serif font-bold text-navy-600 dark:text-navy-200">
+                第 <span x-text="part.id"></span> 部分　<span x-text="part.name"></span>
+              </h3>
+              <span class="text-xs text-ink-muted dark:text-slate-500" x-text="'第 ' + part.range + ' 章'"></span>
+            </div>
+            <ul class="space-y-1">
+              <template x-for="ch in chaptersByPart(part.id)" :key="ch.id">
+                <li>
+                  <button @click="openChapter(ch.id)" class="w-full text-left text-sm text-ink-light dark:text-slate-400 hover:text-navy-600 dark:hover:text-navy-200 hover:bg-slate-50 dark:hover:bg-slate-800 px-2 py-1.5 rounded transition">
+                    <span class="text-gold font-mono text-xs mr-2" x-text="ch.id"></span>
+                    <span x-text="ch.title"></span>
+                  </button>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <!-- 6. 作者介绍 -->
+    <section class="max-w-4xl mx-auto px-6 py-12">
+      <div class="card p-8 md:p-10">
+        <div class="flex md:flex-row flex-col gap-8 items-start">
+          <div class="flex-shrink-0">
+            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-navy-600 to-navy-800 flex items-center justify-center text-white font-serif text-3xl font-bold">宋</div>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-serif text-2xl font-bold text-navy-600 dark:text-navy-200 mb-2">宋秀强</h3>
+            <p class="text-ink-light dark:text-slate-400 mb-4">深耕人力资源和职业发展领域的实践者</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="px-3 py-1 rounded-full bg-navy-50 dark:bg-navy-800 text-navy-600 dark:text-navy-200 text-xs">10年猎头</span>
+              <span class="px-3 py-1 rounded-full bg-navy-50 dark:bg-navy-800 text-navy-600 dark:text-navy-200 text-xs">世界500强招聘经理</span>
+              <span class="px-3 py-1 rounded-full bg-navy-50 dark:bg-navy-800 text-navy-600 dark:text-navy-200 text-xs">GCDF职业规划师</span>
+            </div>
+            <div class="grid grid-cols-3 gap-4 mb-6">
+              <div class="text-center">
+                <p class="font-serif text-2xl font-bold text-gold">5000+</p>
+                <p class="text-xs text-ink-muted dark:text-slate-500">服务求职者</p>
+              </div>
+              <div class="text-center">
+                <p class="font-serif text-2xl font-bold text-gold">10+</p>
+                <p class="text-xs text-ink-muted dark:text-slate-500">年从业经验</p>
+              </div>
+              <div class="text-center">
+                <p class="font-serif text-2xl font-bold text-gold">6+</p>
+                <p class="text-xs text-ink-muted dark:text-slate-500">行业覆盖</p>
+              </div>
+            </div>
+            <p class="text-sm text-ink-light dark:text-slate-400 mb-4 leading-relaxed">
+              覆盖互联网、高科技、人工智能、芯片、智能硬件、金融等多个行业。长期跟踪就业市场趋势，深谙招聘方与求职者的博弈逻辑。
+            </p>
+            <div class="border-t border-slate-200 dark:border-slate-700 pt-4">
+              <p class="text-xs text-ink-muted dark:text-slate-500 mb-2">另著：</p>
+              <ul class="text-sm space-y-1">
+                <li><a href="https://chandler-song.github.io/what-nobody-tells-you-about-work/" target="_blank" class="text-gold hover:underline">《职场上那些没人告诉你的》</a></li>
+                <li><a href="https://chandler-song.github.io/what-you-need-to-know-about-job-hunting/" target="_blank" class="text-gold hover:underline">《关于求职，你要知道的那些事》</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. 页脚 -->
+    <footer class="border-t border-slate-200 dark:border-slate-700 mt-12">
+      <div class="max-w-4xl mx-auto px-6 py-10 text-center">
+        <p class="font-serif text-lg text-navy-600 dark:text-navy-200 mb-2">《我应该回国吗？》</p>
+        <p class="text-sm text-ink-muted dark:text-slate-500 mb-4">宋秀强 著 · 2026 年 9 月</p>
+        <p class="font-serif text-sm text-ink-light dark:text-slate-400 italic mb-6">"知道别人怎么栽的，比知道别人怎么成的更重要。"</p>
+        <p class="text-xs text-ink-muted dark:text-slate-500 max-w-2xl mx-auto leading-relaxed">
+          本书为方法论与信息整合，不构成法律、税务、投资、移民建议。涉及签证、税务、房产、子女教育等具体决策，请咨询持牌专业人士。
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ========== 阅读视图 view='read' ========== -->
+  <div x-show="view==='read'" x-cloak>
+
+    <!-- 进度条 -->
+    <div class="reading-progress" :style="`width: ${progress}%`"></div>
+
+    <!-- 顶部固定栏 -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700">
+      <div class="px-4 py-3 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-2 min-w-0">
+          <button @click="goHome()" class="icon-btn flex-shrink-0" title="返回首页">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <button @click="sidebarOpen=true" class="icon-btn flex-shrink-0 lg:hidden" title="目录">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+          </button>
+          <span class="font-serif text-sm md:text-base font-bold text-navy-600 dark:text-navy-200 truncate" x-text="currentChapterMeta ? '第 ' + currentChapterMeta.id + ' 章 ' + currentChapterMeta.title : ''"></span>
+        </div>
+        <div class="flex items-center gap-1 flex-shrink-0">
+          <button @click="setFont(-1)" class="icon-btn" title="缩小字号" :disabled="fontSize<=16">
+            <span class="text-sm font-bold">A-</span>
+          </button>
+          <button @click="setFont(1)" class="icon-btn" title="放大字号" :disabled="fontSize>=22">
+            <span class="text-base font-bold">A+</span>
+          </button>
+          <button @click="toggleTheme()" class="icon-btn" title="切换主题">
+            <span x-text="theme==='light' ? '🌙' : '☀️'"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 侧边目录 - 桌面常驻 -->
+    <aside class="fixed left-0 top-0 bottom-0 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 z-40 overflow-y-auto pt-16 pb-6 px-4 hidden lg:block">
+      <p class="font-serif font-bold text-navy-600 dark:text-navy-200 px-2 py-2 mb-2">全书目录</p>
+      <template x-for="part in parts" :key="part.id">
+        <div class="mb-3">
+          <p class="text-xs font-bold text-gold px-2 py-1">第 <span x-text="part.id"></span> 部分 · <span x-text="part.name"></span></p>
+          <template x-for="ch in chaptersByPart(part.id)" :key="ch.id">
+            <button @click="openChapter(ch.id)" class="sidebar-link" :class="currentChapter===ch.id ? 'active' : ''">
+              <span class="font-mono text-xs text-gold mr-1" x-text="ch.id"></span>
+              <span x-text="ch.title"></span>
+            </button>
+          </template>
+        </div>
+      </template>
+    </aside>
+
+    <!-- 侧边目录 - 移动端抽屉 -->
+    <div x-show="sidebarOpen" x-cloak x-transition.opacity class="fixed inset-0 bg-black/50 z-50 lg:hidden" @click="sidebarOpen=false"></div>
+    <aside class="fixed left-0 top-0 bottom-0 w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 z-50 overflow-y-auto px-4 py-6 lg:hidden transition-transform duration-300" :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
+      <div class="flex items-center justify-between mb-4 px-2">
+        <p class="font-serif font-bold text-navy-600 dark:text-navy-200">全书目录</p>
+        <button @click="sidebarOpen=false" class="icon-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <template x-for="part in parts" :key="'m'+part.id">
+        <div class="mb-3">
+          <p class="text-xs font-bold text-gold px-2 py-1">第 <span x-text="part.id"></span> 部分 · <span x-text="part.name"></span></p>
+          <template x-for="ch in chaptersByPart(part.id)" :key="'m'+ch.id">
+            <button @click="openChapter(ch.id); sidebarOpen=false" class="sidebar-link" :class="currentChapter===ch.id ? 'active' : ''">
+              <span class="font-mono text-xs text-gold mr-1" x-text="ch.id"></span>
+              <span x-text="ch.title"></span>
+            </button>
+          </template>
+        </div>
+      </template>
+    </aside>
+
+    <!-- 阅读区 -->
+    <main class="lg:ml-64 pt-16 min-h-screen">
+      <article class="max-w-[720px] mx-auto px-6 py-10">
+        <!-- 加载中 -->
+        <div x-show="loading" class="text-center py-20">
+          <div class="inline-block w-8 h-8 border-3 border-gold border-t-transparent rounded-full animate-spin"></div>
+          <p class="mt-4 text-ink-muted dark:text-slate-500">章节加载中…</p>
+        </div>
+
+        <!-- 加载错误 -->
+        <div x-show="error" class="text-center py-20" x-cloak>
+          <p class="font-serif text-xl text-red-600 mb-4">章节加载失败</p>
+          <p class="text-ink-muted dark:text-slate-500 mb-6" x-text="error"></p>
+          <button @click="goHome()" class="btn-primary">返回首页</button>
+        </div>
+
+        <!-- 章节内容 -->
+        <div x-show="!loading && !error" x-cloak>
+          <div class="markdown fade-enter" x-html="currentHtml" :style="`font-size: ${fontSize}px`"></div>
+
+          <!-- 翻页 -->
+          <nav class="flex justify-between items-center mt-16 pt-8 border-t border-slate-200 dark:border-slate-700">
+            <button x-show="prevChapterMeta" @click="prevChapter()" class="flex items-center gap-2 text-navy-600 dark:text-navy-200 hover:text-gold transition">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <span class="text-sm">
+                <span class="block text-xs text-ink-muted dark:text-slate-500">上一章</span>
+                <span x-text="prevChapterMeta ? '第 ' + prevChapterMeta.id + ' 章' : ''"></span>
+              </span>
+            </button>
+            <span x-show="!prevChapterMeta" class="text-sm text-ink-muted dark:text-slate-500">已是第一章</span>
+
+            <button x-show="nextChapterMeta" @click="nextChapter()" class="flex items-center gap-2 text-navy-600 dark:text-navy-200 hover:text-gold transition">
+              <span class="text-sm text-right">
+                <span class="block text-xs text-ink-muted dark:text-slate-500">下一章</span>
+                <span x-text="nextChapterMeta ? '第 ' + nextChapterMeta.id + ' 章' : ''"></span>
+              </span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <span x-show="!nextChapterMeta" class="text-sm text-ink-muted dark:text-slate-500">已是最后一章</span>
+          </nav>
+        </div>
+      </article>
+    </main>
+  </div>
+
+</div>
+
+<style>
+  [x-cloak] { display: none !important; }
+  .border-3 { border-width: 3px; }
+</style>
+</body>
+</html>

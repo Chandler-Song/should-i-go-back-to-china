@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="840" viewBox="0 0 600 840">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#15293f"/>
+      <stop offset="100%" stop-color="#0a1521"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4a843"/>
+      <stop offset="100%" stop-color="#b8860b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="840" fill="url(#bgGrad)"/>
+
+  <rect x="30" y="30" width="540" height="780" fill="none" stroke="#b8860b" stroke-width="3"/>
+  <rect x="42" y="42" width="516" height="756" fill="none" stroke="#b8860b" stroke-width="1"/>
+
+  <text x="300" y="340" text-anchor="middle" font-family="'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', serif" font-size="96" font-weight="700" fill="url(#goldGrad)">我应该</text>
+  <text x="300" y="460" text-anchor="middle" font-family="'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', serif" font-size="96" font-weight="700" fill="url(#goldGrad)">回国吗？</text>
+
+  <line x1="200" y1="510" x2="400" y2="510" stroke="#b8860b" stroke-width="1" opacity="0.6"/>
+
+  <text x="300" y="555" text-anchor="middle" font-family="-apple-system, 'PingFang SC', sans-serif" font-size="22" fill="#adc2d9">Should I Go Back to China?</text>
+
+  <text x="300" y="720" text-anchor="middle" font-family="'Noto Serif SC', serif" font-size="20" fill="#84a3c7">宋秀强 著</text>
+
+  <text x="300" y="760" text-anchor="middle" font-family="-apple-system, 'PingFang SC', sans-serif" font-size="13" fill="#5b84b5" opacity="0.7">硅谷工程师回国决策手册</text>
+</svg>
