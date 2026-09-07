@@ -13,7 +13,7 @@
 |------|------|------|-----------|
 | T1 | 项目骨架与目录 | `index.html` 空壳 + `assets/` 目录 | 低 |
 | T2 | 章节元数据 | `assets/js/chapters.js` | 低 |
-| T3 | 封面 SVG | `assets/images/cover.svg` | 低 |
+| T3 | 封面图片 | `assets/images/cover.png` | 低 |
 | T4 | 排版样式 | `assets/css/book.css` | 中 |
 | T5 | 首页 HTML 结构 | `index.html` 首页七区块 | 中 |
 | T6 | 阅读视图 HTML 结构 | `index.html` 阅读视图 | 中 |
@@ -105,7 +105,7 @@
 
 ## T3 封面 SVG
 
-**目标**：生成 `assets/images/cover.svg`。
+**目标**：提供 `assets/images/cover.png`。
 
 **参数**（遵循 design §8）：
 - 画布 600×840

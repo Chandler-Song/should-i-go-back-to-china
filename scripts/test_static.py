@@ -22,7 +22,7 @@ print("=" * 60)
 # 1. 核心文件存在
 print("\n[1] 核心文件存在性")
 for f in ["index.html", "assets/css/book.css", "assets/js/chapters.js",
-          "assets/js/app.js", "assets/images/cover.svg"]:
+          "assets/js/app.js", "assets/images/cover.png"]:
     p = os.path.join(ROOT, f)
     if os.path.isfile(p) and os.path.getsize(p) > 0:
         ok(f"{f} ({os.path.getsize(p)}B)")
@@ -77,7 +77,7 @@ print("\n[4] index.html 资源引用")
 with open(os.path.join(ROOT, "index.html"), encoding="utf-8") as f:
     html = f.read()
 for ref in ["assets/css/book.css", "assets/js/chapters.js", "assets/js/app.js",
-            "assets/images/cover.svg"]:
+            "assets/images/cover.png"]:
     if ref in html:
         ok(f"引用 {ref}")
     else:
@@ -127,15 +127,13 @@ for sel in [".markdown", ".markdown h1", ".markdown blockquote", ".markdown tabl
     else:
         fail(f"缺少样式: {sel}")
 
-# 7. cover.svg 结构
-print("\n[7] cover.svg 结构")
-with open(os.path.join(ROOT, "assets/images/cover.svg"), encoding="utf-8") as f:
-    svg = f.read()
-for token in ["<svg", "我应该", "回国吗", "宋秀强", "goldGrad", "bgGrad"]:
-    if token in svg:
-        ok(f"SVG 含: {token}")
-    else:
-        fail(f"SVG 缺: {token}")
+# 7. cover.png 存在性
+print("\n[7] cover.png 存在性")
+cover_png = os.path.join(ROOT, "assets/images/cover.png")
+if os.path.isfile(cover_png) and os.path.getsize(cover_png) > 0:
+    ok(f"cover.png ({os.path.getsize(cover_png)}B)")
+else:
+    fail("cover.png 缺失或为空")
 
 # 8. PARTS 9篇
 print("\n[8] PARTS 9篇")

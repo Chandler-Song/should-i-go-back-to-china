@@ -35,7 +35,7 @@ try:
     check(f"{base}/assets/css/book.css", "book.css")
     check(f"{base}/assets/js/chapters.js", "chapters.js")
     check(f"{base}/assets/js/app.js", "app.js")
-    check(f"{base}/assets/images/cover.svg", "cover.svg")
+    check(f"{base}/assets/images/cover.png", "cover.png")
 
     import glob
     ch_files = sorted(glob.glob(os.path.join(ROOT, "gobackchina", "ch*.md")))

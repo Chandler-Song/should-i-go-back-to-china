@@ -33,7 +33,7 @@ gotochina/
 │   │   ├── app.js              # Alpine.js 主组件 + 章节数据 + 交互逻辑
 │   │   └── chapters.js         # 40 章元数据（file/title/part/subtitle）
 │   └── images/
-│       └── cover.svg           # 自动生成的 SVG 封面（可被 cover.png 替换）
+│       └── cover.png           # 封面图片（PNG）
 ├── gobackchina/                # 40 章 markdown 原稿（已存在，按需 fetch）
 │   ├── ch01_overview_and_era_context.md
 │   └── ... ch40_financial_tax_cross_border.md
@@ -241,7 +241,7 @@ const PARTS = [
 
 ---
 
-## 8. 封面 SVG（assets/images/cover.svg）
+## 8. 封面（assets/images/cover.png）
 
 遵循 `book_design_style §2.4`，自动生成：
 
@@ -252,7 +252,7 @@ const PARTS = [
 - 底部作者署名"宋秀强"，18px，navy-300
 - 装饰语"硅谷工程师回国决策手册"，13px，navy-400 70% 透明度
 
-`<img src="cover.svg" onerror="this.src='cover.png'">` 支持 PNG 替换。
+`<img src="cover.png">` 直接引用 PNG 封面。
 
 ---
 

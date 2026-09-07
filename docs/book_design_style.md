@@ -89,7 +89,7 @@ ink:  { DEFAULT:'#111827', light:'#4b5563', muted:'#6b7280' }
 | 作者署名 | 底部，18px，navy-300 |
 | 装饰语 | 底部，13px，navy-400，70% 透明度 |
 
-**替换方式**：将 `cover.png` 放入 `assets/images/` 同目录即可，`<img>` 标签的 `onerror` 自动降级。
+**替换方式**：将 `cover.png` 放入 `assets/images/` 同目录，`<img>` 标签直接引用。
 
 ### 2.5 视觉层级与组件
 
@@ -213,7 +213,7 @@ tailwind.config = {
 | 金句 | `QUOTES` 数组 | 从新书提取 6–9 句 |
 | 核心模型 | `POWER_LEVELS` 数组 | 替换为新书的核心框架 |
 | 作者信息 | `AUTHOR` 对象 | 姓名、头衔、统计、著作 |
-| 封面 | `cover.svg` | 改书名文字和配色 |
+| 封面 | `cover.png` | 替换为本书封面图片 |
 | 章节分组 | `chapters` 的 `part` 字段 | 按新书的篇划分 |
 
 ### 5.3 配色变体示例
