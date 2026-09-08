@@ -1,4 +1,4 @@
-# 《我应该回国吗？》网页书 — 任务分解文档（tasks.md）
+# 《要不要回国？》网页书 — 任务分解文档（tasks.md）
 
 > 版本：v1.0  
 > 创建日期：2026-09-07  
@@ -111,7 +111,7 @@
 - 画布 600×840
 - 背景 Navy 渐变 `#15293f → #0a1521`（纵向）
 - 双线边框：外框 3px gold `#b8860b`，内框 1px gold，间距 12px
-- 书名"我应该回国吗？"居中，130px，金色渐变 `#d4a843 → #b8860b`
+- 书名"要不要回国？"居中，130px，金色渐变 `#d4a843 → #b8860b`
 - 副标题"Should I Go Back to China?"，24px，navy-200 `#adc2d9`
 - 作者"宋秀强"，18px，navy-300 `#84a3c7`
 - 装饰语"硅谷工程师回国决策手册"，13px，navy-400 `#5b84b5` 70% 透明
@@ -194,7 +194,7 @@
 9. `setFont(delta)`：clamp 16-22 + 存 localStorage + 应用到阅读区
 10. `onScroll()`：rAF 节流，计算 progress
 11. `prevChapter()` / `nextChapter()`：边界检查后 openChapter
-12. `randomChapter()`：随机 openChapter
+12. `goAuthor()`：平滑滚动到作者介绍区块（id=author）；若在阅读视图先回首页
 
 **错误处理**：
 - fetch 失败：阅读区显示错误提示 + 返回首页链接

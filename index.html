@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我应该回国吗？ — 硅谷工程师回国决策手册</title>
+  <title>要不要回国？ — 硅谷工程师回国决策手册</title>
   <meta name="description" content="面向在海外工作的资深工程师的回国方法论：市场、薪酬、城市、家庭、心理、时机、案例、时代挑战、实操九大板块，40 章 14 万字。">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,9 +33,9 @@
   </script>
 
   <link rel="stylesheet" href="assets/css/book.css">
-  <script defer src="assets/js/chapters.js"></script>
+  <script defer src="assets/js/chapters.js?v=20260908"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-  <script defer src="assets/js/app.js"></script>
+  <script defer src="assets/js/app.js?v=20260908"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 </head>
 <body class="bg-white dark:bg-slate-900 text-ink dark:text-slate-200 font-sans antialiased">
@@ -49,7 +49,7 @@
     <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur border-b border-slate-200 dark:border-slate-700">
       <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <span class="font-serif text-xl font-bold text-navy-600 dark:text-navy-200">我应该回国吗？</span>
+          <span class="font-serif text-xl font-bold text-navy-600 dark:text-navy-200">要不要回国？</span>
         </div>
         <div class="flex items-center gap-2">
           <button @click="toggleTheme()" class="icon-btn" title="切换主题">
@@ -67,14 +67,15 @@
       </div>
       <div>
         <p class="text-gold font-sans text-sm tracking-widest mb-4">SILICON VALLEY · 回国决策手册</p>
-        <h1 class="font-serif text-4xl md:text-5xl font-bold text-navy-600 dark:text-navy-200 leading-tight mb-4">我应该回国吗？</h1>
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-navy-600 dark:text-navy-200 leading-tight mb-4">要不要回国？</h1>
         <p class="font-serif text-lg text-navy-400 dark:text-navy-300 mb-6">Should I Go Back to China?</p>
+
         <p class="text-ink-light dark:text-slate-400 leading-relaxed mb-8">
-          面向在海外（尤其硅谷）工作的资深工程师 / 管理者 / 管线专家，提供一套从信息调研到落地执行的回国方法论。全书 40 章，约 14 万字，覆盖市场、薪酬、城市、家庭、心理、时机、案例、时代挑战、实操九大板块。
+          面向在海外（尤其硅谷）工作的资深工程师 / 技术管理者 ，提供一套从信息调研到落地执行的回国方法论。全书 40 章，约 14 万字，覆盖市场、薪酬、城市、家庭、心理、时机、案例、时代挑战、实操九大板块。
         </p>
         <div class="flex flex-wrap gap-4">
           <button @click="openChapter(lastChapter || '01')" class="btn-primary">开始阅读</button>
-          <button @click="randomChapter()" class="btn-secondary">随机一章</button>
+          <button @click="goAuthor()" class="btn-secondary">作者介绍</button>
         </div>
         <p x-show="lastChapter" class="text-sm text-ink-muted dark:text-slate-500 mt-4">
           上次读到第 <span x-text="lastChapter"></span> 章
@@ -201,7 +202,7 @@
     </section>
 
     <!-- 6. 作者介绍 -->
-    <section class="max-w-4xl mx-auto px-6 py-12">
+    <section id="author" class="max-w-4xl mx-auto px-6 py-12">
       <div class="card p-8 md:p-10">
         <div class="flex md:flex-row flex-col gap-8 items-start">
           <div class="flex-shrink-0">
@@ -247,7 +248,7 @@
     <!-- 7. 页脚 -->
     <footer class="border-t border-slate-200 dark:border-slate-700 mt-12">
       <div class="max-w-4xl mx-auto px-6 py-10 text-center">
-        <p class="font-serif text-lg text-navy-600 dark:text-navy-200 mb-2">《我应该回国吗？》</p>
+        <p class="font-serif text-lg text-navy-600 dark:text-navy-200 mb-2">《要不要回国？》</p>
         <p class="text-sm text-ink-muted dark:text-slate-500 mb-4">宋秀强 著 · 2026 年 9 月</p>
         <p class="font-serif text-sm text-ink-light dark:text-slate-400 italic mb-6">"知道别人怎么栽的，比知道别人怎么成的更重要。"</p>
         <p class="text-xs text-ink-muted dark:text-slate-500 max-w-2xl mx-auto leading-relaxed">

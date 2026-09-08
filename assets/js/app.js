@@ -191,9 +191,25 @@ function bookApp() {
       if (this.nextChapterMeta) this.openChapter(this.nextChapterMeta.id);
     },
 
-    randomChapter() {
-      const idx = Math.floor(Math.random() * this.chapters.length);
-      this.openChapter(this.chapters[idx].id);
+
+    goAuthor() {
+      if (this.view === 'read') {
+        this.goHome();
+        this.$nextTick(() => {
+          requestAnimationFrame(() => this.scrollToAuthor());
+        });
+      } else {
+        this.$nextTick(() => {
+          requestAnimationFrame(() => this.scrollToAuthor());
+        });
+      }
+    },
+
+    scrollToAuthor() {
+      const el = document.getElementById('author');
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - 64;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
     },
   };
 }
