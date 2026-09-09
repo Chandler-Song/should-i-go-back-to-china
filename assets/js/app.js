@@ -19,7 +19,7 @@ function bookApp() {
 
     init() {
       this.theme = localStorage.getItem('book-theme') || 'light';
-      this.fontSize = parseInt(localStorage.getItem('book-fontsize')) || 18;
+      this.fontSize = parseInt(localStorage.getItem('book-fontsize')) || (window.innerWidth <= 768 ? 17 : 18);
       this.lastChapter = localStorage.getItem('book-lastchapter') || null;
       this.immersive = localStorage.getItem('book-immersive') === '1';
 
@@ -160,10 +160,12 @@ function bookApp() {
 
     setFont(delta) {
       const next = this.fontSize + delta;
-      if (next < 16 || next > 22) return;
+      if (next < 16 || next > 24) return;
       this.fontSize = next;
       localStorage.setItem('book-fontsize', String(next));
     },
+
+    get lineHeight() { return this.fontSize >= 20 ? 1.8 : 1.85; },
 
     onScroll() {
       if (this._scrollScheduled) return;

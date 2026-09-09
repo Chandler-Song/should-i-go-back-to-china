@@ -223,7 +223,7 @@ body { font-family: var(--font-sans); }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 @media (max-width: 768px) {
-  .markdown { font-size: 17px; line-height: 1.8; }
+
   .markdown h1 { font-size: 1.5em; }
   .markdown h2 { font-size: 1.2em; }
 }
