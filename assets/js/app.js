@@ -11,6 +11,8 @@ function bookApp() {
     loading: false,
     error: null,
     lastChapter: null,
+    immersive: false,
+    barVisible: false,
     parts: (typeof PARTS !== 'undefined') ? PARTS : [],
     chapters: (typeof CHAPTERS !== 'undefined') ? CHAPTERS : [],
     _scrollScheduled: false,
@@ -19,6 +21,7 @@ function bookApp() {
       this.theme = localStorage.getItem('book-theme') || 'light';
       this.fontSize = parseInt(localStorage.getItem('book-fontsize')) || 18;
       this.lastChapter = localStorage.getItem('book-lastchapter') || null;
+      this.immersive = localStorage.getItem('book-immersive') === '1';
 
       if (this.theme === 'dark') {
         document.documentElement.classList.add('dark');
@@ -176,12 +179,21 @@ function bookApp() {
     onKeydown(e) {
       if (this.view !== 'read') return;
       if (e.key === 'Escape') {
+        if (this.immersive) this.toggleImmersive();
         this.sidebarOpen = false;
+      } else if (e.key === 'i' || e.key === 'I') {
+        this.toggleImmersive();
       } else if (e.key === 'ArrowLeft' && this.prevChapterMeta) {
         this.prevChapter();
       } else if (e.key === 'ArrowRight' && this.nextChapterMeta) {
         this.nextChapter();
       }
+    },
+
+    toggleImmersive() {
+      this.immersive = !this.immersive;
+      this.barVisible = false;
+      localStorage.setItem('book-immersive', this.immersive ? '1' : '0');
     },
 
     prevChapter() {
