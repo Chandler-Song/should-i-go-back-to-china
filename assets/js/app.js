@@ -13,9 +13,11 @@ function bookApp() {
     lastChapter: null,
     immersive: false,
     barVisible: false,
+    moreOpen: false,
     parts: (typeof PARTS !== 'undefined') ? PARTS : [],
     chapters: (typeof CHAPTERS !== 'undefined') ? CHAPTERS : [],
     _scrollScheduled: false,
+    _revealObserver: null,
 
     init() {
       this.theme = localStorage.getItem('book-theme') || 'light';
@@ -32,6 +34,35 @@ function bookApp() {
       window.addEventListener('keydown', (e) => this.onKeydown(e));
 
       this.handleHash();
+      this.$nextTick(() => this.initReveal());
+    },
+
+    initReveal() {
+      const targets = document.querySelectorAll('.reveal');
+      if (!targets.length) return;
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(el => el.classList.add('reveal-visible'));
+        return;
+      }
+      this._revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+            this._revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      targets.forEach(el => this._revealObserver.observe(el));
+    },
+
+    replayChapterAnim() {
+      this.$nextTick(() => {
+        const el = document.querySelector('.markdown');
+        if (!el) return;
+        el.classList.remove('chapter-enter');
+        void el.offsetWidth;
+        el.classList.add('chapter-enter');
+      });
     },
 
     get currentChapterMeta() {
@@ -92,6 +123,7 @@ function bookApp() {
       if (this.chapterCache[id]) {
         this.currentHtml = this.chapterCache[id];
         this.loading = false;
+        this.replayChapterAnim();
         this.$nextTick(() => window.scrollTo(0, 0));
         return;
       }
@@ -105,6 +137,7 @@ function bookApp() {
         this.chapterCache[id] = html;
         this.currentHtml = html;
         this.loading = false;
+        this.replayChapterAnim();
         this.$nextTick(() => window.scrollTo(0, 0));
 
         const next = this.nextChapterMeta;
