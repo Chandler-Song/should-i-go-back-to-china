@@ -337,6 +337,97 @@ body { font-family: var(--font-sans); }
 .dark .menu-item { color: #9a9a9a; }
 .dark .menu-item:hover { background: #1e293b; color: #d6e0eb; }
 
+/* ===== 作者区：迷你书卡 / 联系胶囊 / 头像 ===== */
+.book-card {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  padding: .625rem .75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+  transition: transform var(--motion-fast) var(--ease-out), box-shadow var(--motion-fast) var(--ease-out), border-color var(--motion-fast) var(--ease-out), background var(--motion-fast) var(--ease-out);
+}
+.book-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15,31,48,.08);
+  border-color: rgba(184,134,11,.4);
+  background: #fdfbf5;
+}
+.dark .book-card { border-color: #334155; background: rgba(30,41,59,.5); }
+.dark .book-card:hover {
+  border-color: rgba(212,168,67,.45);
+  background: #1e293b;
+  box-shadow: 0 4px 12px rgba(0,0,0,.35);
+}
+.book-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #ebf0f5;
+  color: #1e3a5f;
+  transition: background var(--motion-fast) var(--ease-out), color var(--motion-fast) var(--ease-out);
+}
+.book-card:hover .book-card-icon { background: #b8860b; color: #fff; }
+.dark .book-card-icon { background: #0a1521; color: #adc2d9; }
+.dark .book-card:hover .book-card-icon { background: #d4a843; color: #0f172a; }
+.book-card-arrow {
+  flex-shrink: 0;
+  color: #94a3b8;
+  transition: color var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
+}
+.book-card:hover .book-card-arrow { color: #8b6508; transform: translate(2px, -2px); }
+.dark .book-card:hover .book-card-arrow { color: #d4a843; }
+
+.contact-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .4rem .75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: .75rem;
+  color: #4b5563;
+  background: #fff;
+  cursor: pointer;
+  transition: transform var(--motion-fast) var(--ease-out), border-color var(--motion-fast) var(--ease-out), background var(--motion-fast) var(--ease-out), color var(--motion-fast) var(--ease-out));
+}
+.contact-chip:hover {
+  transform: translateY(-1px);
+  border-color: rgba(184,134,11,.5);
+  background: rgba(184,134,11,.05);
+  color: #8b6508;
+}
+.dark .contact-chip { border-color: #334155; color: #9a9a9a; background: rgba(30,41,59,.5); }
+.dark .contact-chip:hover { border-color: rgba(212,168,67,.5); background: rgba(212,168,67,.08); color: #d4a843; }
+.contact-chip svg { color: #1e3a5f; transition: color var(--motion-fast) var(--ease-out); }
+.contact-chip:hover svg { color: #8b6508; }
+.dark .contact-chip svg { color: #adc2d9; }
+.dark .contact-chip:hover svg { color: #d4a843; }
+
+.author-avatar {
+  transition: transform var(--motion-base) var(--ease-out), box-shadow var(--motion-base) var(--ease-out);
+}
+.author-avatar:hover {
+  transform: scale(1.04);
+}
+
+/* ===== 键盘 focus-visible 焦点环（可访问性） ===== */
+.book-card:focus-visible,
+.contact-chip:focus-visible {
+  outline: 2px solid #b8860b;
+  outline-offset: 2px;
+}
+.dark .book-card:focus-visible,
+.dark .contact-chip:focus-visible {
+  outline-color: #d4a843;
+}
+
 /* ===== 品牌 loading spinner ===== */
 .brand-spinner {
   display: inline-block;

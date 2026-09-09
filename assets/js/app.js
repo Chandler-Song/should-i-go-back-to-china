@@ -38,7 +38,7 @@ function bookApp() {
     },
 
     initReveal() {
-      const targets = document.querySelectorAll('.reveal');
+      const targets = document.querySelectorAll('.reveal, .reveal-group');
       if (!targets.length) return;
       if (!('IntersectionObserver' in window)) {
         targets.forEach(el => el.classList.add('reveal-visible'));
@@ -262,3 +262,18 @@ function bookApp() {
 }
 
 window.bookApp = bookApp;
+
+window.copyToClipboard = function (text, btn) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () {
+      if (!btn) return;
+      var span = btn.querySelector('span');
+      if (!span) return;
+      var orig = span.textContent;
+      span.textContent = '已复制 ✓';
+      setTimeout(function () { span.textContent = orig; }, 1500);
+    });
+  } else {
+    alert('请手动复制：' + text);
+  }
+};
