@@ -442,44 +442,25 @@ body { font-family: var(--font-sans); }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ===== 沉浸式阅读模式 ===== */
+/* v2.0：顶栏固定常驻，沉浸时不隐藏；聚焦靠阅读宽度收窄 + 侧栏收起 */
 
-/* 顶部唤出区：沉浸时覆盖页面顶部 44px，鼠标移入唤出顶栏 */
-.top-zone {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 44px;
-  z-index: 55;
-  pointer-events: none;
-}
-.immersive .top-zone { pointer-events: auto; }
-
-/* 顶栏：沉浸时滑出隐藏，barVisible 时滑入（三段编排第一步，0ms） */
-.read-header {
-  transition: transform var(--motion-base) var(--ease-out), opacity var(--motion-base) var(--ease-out);
-  pointer-events: auto;
-  will-change: transform;
-}
-.bar-hidden {
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* 桌面侧边目录：沉浸时滑出隐藏（三段编排第二步，delay 100ms） */
+/* 桌面侧边目录：沉浸时滑出隐藏，点击顶栏目录按钮唤出（.sidebar-show） */
 .read-sidebar { transition: transform var(--motion-base) var(--ease-out); }
 .immersive .read-sidebar {
   transform: translateX(-105%);
   transition-delay: 100ms;
 }
+.immersive .read-sidebar.sidebar-show {
+  transform: translateX(0);
+  transition-delay: 0ms;
+}
 
-/* 阅读区：沉浸时取消侧栏留白、宽度收窄聚焦（三段编排第三步，delay 200ms） */
+/* 阅读区：沉浸时取消侧栏留白、宽度收窄聚焦 */
 .immersive .read-main { margin-left: 0 !important; }
 
 .read-article { transition: max-width var(--motion-slow) var(--ease-in-out); }
 .immersive .read-article {
-  max-width: 620px;
+  max-width: 680px;
   transition-delay: 200ms;
 }
 /* 沉浸时行距舒展、字距微调（覆盖 inline style 需 !important） */
@@ -488,22 +469,22 @@ body { font-family: var(--font-sans); }
   letter-spacing: .01em;
 }
 
-/* 翻页卡片：沉浸时淡出，悬停恢复 */
+/* 翻页卡片：沉浸时淡出（提升可见性 0.15→0.35），悬停恢复；上方加 Gold 渐变暗示线 */
 .chapter-nav { transition: opacity var(--motion-base) var(--ease-out); }
-.immersive .chapter-nav { opacity: .15; }
+.immersive .chapter-nav { opacity: .35; }
 .immersive .chapter-nav:hover { opacity: 1; }
+.immersive .chapter-nav::before {
+  content: "";
+  display: block;
+  height: 1px;
+  margin: -6px 0 18px;
+  background: linear-gradient(90deg, transparent, #b8860b, transparent);
+  opacity: .6;
+}
 
 /* 进度条：沉浸时更细 */
 .immersive .reading-progress { height: 2px; }
 
-/* 沉浸时移动端悬浮目录按钮 */
-.fab-toc {
-  background: #1e3a5f;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,.25);
-}
-.fab-toc:hover { background: #15293f; }
-.dark .fab-toc { background: #b8860b; color: #0f172a; }
 
 /* ===== 可访问性：减弱动态效果兜底 ===== */
 @media (prefers-reduced-motion: reduce) {

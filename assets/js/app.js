@@ -4,15 +4,15 @@ function bookApp() {
     currentChapter: null,
     currentHtml: '',
     chapterCache: {},
-    fontSize: 18,
+    fontSize: 14,
     theme: 'light',
     sidebarOpen: false,
+    sidebarShow: false,
     progress: 0,
     loading: false,
     error: null,
     lastChapter: null,
     immersive: false,
-    barVisible: false,
     moreOpen: false,
     parts: (typeof PARTS !== 'undefined') ? PARTS : [],
     chapters: (typeof CHAPTERS !== 'undefined') ? CHAPTERS : [],
@@ -21,7 +21,8 @@ function bookApp() {
 
     init() {
       this.theme = localStorage.getItem('book-theme') || 'light';
-      this.fontSize = parseInt(localStorage.getItem('book-fontsize')) || (window.innerWidth <= 768 ? 17 : 18);
+      const savedSize = parseInt(localStorage.getItem('book-fontsize'));
+      this.fontSize = (isNaN(savedSize)) ? 14 : Math.min(20, Math.max(10, savedSize));
       this.lastChapter = localStorage.getItem('book-lastchapter') || null;
       this.immersive = localStorage.getItem('book-immersive') === '1';
 
@@ -114,6 +115,7 @@ function bookApp() {
       this.currentChapter = id;
       this.error = null;
       this.sidebarOpen = false;
+      this.sidebarShow = false;
       window.scrollTo(0, 0);
       this.progress = 0;
 
@@ -193,12 +195,12 @@ function bookApp() {
 
     setFont(delta) {
       const next = this.fontSize + delta;
-      if (next < 16 || next > 24) return;
+      if (next < 10 || next > 20) return;
       this.fontSize = next;
       localStorage.setItem('book-fontsize', String(next));
     },
 
-    get lineHeight() { return this.fontSize >= 20 ? 1.8 : 1.85; },
+    get lineHeight() { return this.fontSize >= 16 ? 1.8 : 1.85; },
 
     onScroll() {
       if (this._scrollScheduled) return;
@@ -214,8 +216,10 @@ function bookApp() {
     onKeydown(e) {
       if (this.view !== 'read') return;
       if (e.key === 'Escape') {
-        if (this.immersive) this.toggleImmersive();
-        this.sidebarOpen = false;
+        if (this.sidebarOpen) this.sidebarOpen = false;
+        else if (this.sidebarShow) this.sidebarShow = false;
+        else if (this.moreOpen) this.moreOpen = false;
+        else if (this.immersive) this.toggleImmersive();
       } else if (e.key === 'i' || e.key === 'I') {
         this.toggleImmersive();
       } else if (e.key === 'ArrowLeft' && this.prevChapterMeta) {
@@ -227,8 +231,18 @@ function bookApp() {
 
     toggleImmersive() {
       this.immersive = !this.immersive;
-      this.barVisible = false;
       localStorage.setItem('book-immersive', this.immersive ? '1' : '0');
+      if (!this.immersive) {
+        this.sidebarShow = false;
+      }
+    },
+
+    openToc() {
+      if (window.innerWidth >= 1024) {
+        this.sidebarShow = !this.sidebarShow;
+      } else {
+        this.sidebarOpen = true;
+      }
     },
 
     prevChapter() {
